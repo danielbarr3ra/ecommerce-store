@@ -5,7 +5,7 @@ const { Router } = express
 
 const app = express()
 
-const isAdmin = true;
+const isAdmin = true
 
 const credentialError = (path, method) => {
     const errorObj = {
@@ -28,16 +28,16 @@ const onlyAdmin = (req, res, next) => {
     }
 }
 
-const productsRouter = new Router();
+const productsRouter = new Router()
 
 productsRouter.get('/', async (req, res) => {
-    console.log('testing the product router');
+    console.log('testing the product router')
     res.json([])
 })
 
-const shoppingCartsRouter = new Router();
+const shoppingCartsRouter = new Router()
 shoppingCartsRouter.get('/', async (req, res) => {
-    console.log('testing the product router');
+    console.log('testing the product router')
     res.json([])
 })
 
