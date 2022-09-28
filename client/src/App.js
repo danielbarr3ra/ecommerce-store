@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 
-function App() {
+import HomeDisplay from './components/HomeDisplay';
+import ProductInventory from './components/ProductInventory';
+import ShoppingCarts from './components/ShoppingCarts';
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/inventory">Inventory</Link>
+            </li>
+            <li>
+              <Link to="/cart">Cart</Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* 👇️ Wrap your Route components in a Routes component */}
+        <Routes>
+          <Route path="/" element={<HomeDisplay />} />
+          <Route path="/inventory" element={<ProductInventory />} />
+          <Route path="/cart" element={<ShoppingCarts />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
-
-export default App;
