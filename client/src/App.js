@@ -23,7 +23,7 @@ export default function App() {
           </ul>
         </nav>
 
-        {/* 👇️ Wrap your Route components in a Routes component */}
+
         <Routes>
           <Route path="/" element={<HomeDisplay />} />
           <Route path="/inventory" element={<ProductInventory />} />

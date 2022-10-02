@@ -1,5 +1,6 @@
 import React from "react";
 import { TableContainer, TableHead, TableRow, TableCell, TableBody, Table, Paper } from '@mui/material'
+import SubmitProductForm from "./SubmitProductForm";
 
 const ProductInventory = () => {
 
@@ -23,7 +24,7 @@ const ProductInventory = () => {
     ];
 
     return (
-        <TableContainer component={Paper}>
+        <><TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
@@ -51,7 +52,8 @@ const ProductInventory = () => {
                     ))}
                 </TableBody>
             </Table>
-        </TableContainer>
+        </TableContainer><SubmitProductForm />
+        </>
     )
 }
 
