@@ -1,6 +1,6 @@
-import FileContainer from "../../containers/FileContainer";
+import FileContainer from "../../containers/FileContainer.js";
 
-class FileCartDao extends FileContainer() {
+class FileCartDao extends FileContainer {
     constructor() {
         super('products.json')
     }
