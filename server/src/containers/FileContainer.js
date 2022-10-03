@@ -1,4 +1,5 @@
 import fs from 'fs/promises'
+import config from '../config.js'
 // make sure you use the promises instead of the fs will need to parse and unparse use helper functions for that
 
 
@@ -10,7 +11,7 @@ class FileContainer {
      * For cars we can do later on
      */
     constructor(path) {
-        this.path = path;
+        this.path = `${config.fileSystem.path}/${path}`
     }
 
     /**
