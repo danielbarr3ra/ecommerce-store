@@ -1,0 +1,14 @@
+[
+    {
+        "name": "test",
+        "price": 123,
+        "thumbnaiil": "www.test1.com",
+        "id": "1"
+    },
+    {
+        "name": "test2",
+        "price": 123,
+        "thumbnaiil": "www.test2.com",
+        "id": "2"
+    }
+]
