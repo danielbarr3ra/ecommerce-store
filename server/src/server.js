@@ -43,15 +43,20 @@ productsRouter.get('/', async (req, res) => {
 
 
 productsRouter.get('/:id', async (req, res) => {
-    console.log('testing the product router')
-    const item = ProductsApi.get()
+    console.log('getting the product by id')
+    const id = req.params.id;
+    const item = await ProductsApi.get(id);
+    console.log(` serched  id is ${id}  and the body of the elemnt is ${item}`)
     res.json(item)
 })
 
 
 productsRouter.post('/', onlyAdmin, async (req, res) => {
-    console.log('testing the product router')
-    res.json([])
+    console.log('testing posting a product router')
+    console.log(`THE BODY BEING SAVED IS ${JSON.stringify(req.body)}`)
+    const obj = await ProductsApi.save(req.body)
+    console.log(`the object was save ${obj}`)
+    res.json(obj)
 })
 
 

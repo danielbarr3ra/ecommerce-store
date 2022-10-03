@@ -26,6 +26,7 @@ class FileContainer {
             return this.convertToJson(allItems)
         } catch (error) {
             console.log('there was en error fetching the items');
+            console.log(error)
             return error;
         }
     }
@@ -35,12 +36,12 @@ class FileContainer {
         try {
             const allItems = await this.getAll()
             const item = allItems.filter((item) => {
-                return item.id == id;
+                return item.id == parseInt(id);
             })
             if (!item) {
                 throw error('There was no item that matched the id')
             }
-            return item
+            return item[0]
         } catch (error) {
             console.log('there was en error fetching the items');
             return error;
@@ -68,20 +69,25 @@ class FileContainer {
     async save(obj) {
         try {
             let allItems = await this.getAll();
-            let lastId = allItems[allItems.length - 1].id;
+            let lastId = allItems[allItems.length - 1].id ?? 0; //nullish coelece in case you have no objects in it
             allItems.push({ ...obj, id: ++lastId })
             await this.saveAll(allItems)
+            return obj; // will return the saved obj
         } catch (error) {
             console.log('there was an error saving one of the objects')
+            console.log(error)
             return error
         }
     }
 
     async saveAll(anArray) {
         try {
-            await fs.writeFile(anArray)
+            console.log(`The array being save is ${JSON.stringify(anArray)}`)
+            const stringed = JSON.stringify(anArray)
+            await fs.writeFile(this.path, stringed)
         } catch (error) {
             console.log('there was an error saving all the objects')
+            console.log(error)
             return error
         }
     }
