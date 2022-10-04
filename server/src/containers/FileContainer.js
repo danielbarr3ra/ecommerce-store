@@ -94,10 +94,10 @@ class FileContainer {
     async delete(id) {
         try {
             let allItems = await this.getAll()
-            allItems.filter((obj) => {
-                return obj.id != id;
+            const filtered = allItems.filter((obj) => {
+                return obj.id != parseInt(id);
             })
-            await this.saveAll(allItems);
+            await this.saveAll(filtered);
         } catch (error) {
             console.log('there was an error deleting the item');
             return error;

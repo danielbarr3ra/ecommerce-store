@@ -67,8 +67,11 @@ productsRouter.put('/:id', onlyAdmin, async (req, res) => {
 
 
 productsRouter.delete('/:id', onlyAdmin, async (req, res) => {
-    console.log('testing the product router')
-    res.json([])
+    console.log('testing the product is deleted')
+    const id = req.params.id;
+    const item = await ProductsApi.get(id)
+    await ProductsApi.delete(id)
+    res.json(item)
 })
 
 
