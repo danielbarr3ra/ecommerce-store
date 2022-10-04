@@ -61,8 +61,11 @@ productsRouter.post('/', onlyAdmin, async (req, res) => {
 
 
 productsRouter.put('/:id', onlyAdmin, async (req, res) => {
-    console.log('testing the product router')
-    res.json([])
+    console.log('testing updating the product router')
+    const id = req.params.id;
+    const obj = req.body;
+    const updated = await ProductsApi.update(id, obj);
+    res.json(updated)
 })
 
 

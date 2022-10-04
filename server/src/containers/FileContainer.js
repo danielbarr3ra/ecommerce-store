@@ -51,17 +51,16 @@ class FileContainer {
         try {
             let allItems = await this.getAll();
             const index = allItems.findIndex((obj) => {
-                return obj.id == id
+                return obj.id == parseInt(id)
             })
             const updated = { ...obj, id: id }
-            if (!index) {
-                throw error('there is no item that matched that id')
-            }
             allItems[index] = updated;
 
             await this.saveAll(allItems)
+            return updated
 
         } catch (error) {
+            console.log(error)
             console.log('there was an error updating the item')
             return error;
         }
