@@ -23,7 +23,7 @@ class FileContainer {
     async getAll() {
         try {
             const allItems = await fs.readFile(this.path)
-            return this.convertToJson(allItems)
+            return JSON.parse(allItems)
         } catch (error) {
             console.log('there was en error fetching the items');
             console.log(error)
@@ -110,16 +110,6 @@ class FileContainer {
             return error;
         }
     }
-
-
-    // just for readibility (for me at least)
-    convertToJson(aString) {
-        return JSON.parse(aString)
-    }
-    convertToString(json) {
-        return JSON.stringify(json)
-    }
-
 }
 
 export default FileContainer
