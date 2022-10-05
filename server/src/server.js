@@ -82,9 +82,48 @@ productsRouter.delete('/:id', onlyAdmin, async (req, res) => {
  * TODO add the cart ones and the product within cart ones
  * 
  */
+
 const shoppingCartsRouter = new Router()
+
+
 shoppingCartsRouter.get('/', async (req, res) => {
-    console.log('testing the product router')
+    console.log('testing the getting all the carts')
+    const allCarts = await CartsApi.getAll();
+    res.json(allCarts)
+})
+
+shoppingCartsRouter.post('/', async (req, res) => {
+    console.log('testing adding a new cart')
+    const obj = req.body;
+    const added = await CartsApi.save(obj)
+    res.json(added);
+})
+
+
+shoppingCartsRouter.delete('/:id', async (req, res) => {
+    console.log('deleting a certain cart from the list')
+    const id = req.params.id
+    const deleted = await CartsApi.delete(id)
+    res.json(deleted)
+})
+
+//Products within the CAST
+
+
+shoppingCartsRouter.get('/:id/products', async (req, res) => {
+    console.log('testing the getting all the carts')
+    res.json([])
+})
+
+
+shoppingCartsRouter.post('/:id/products', async (req, res) => {
+    console.log('testing the getting all the carts')
+    res.json([])
+})
+
+
+shoppingCartsRouter.delete('/:id/products/:idProd', async (req, res) => {
+    console.log('testing the getting all the carts')
     res.json([])
 })
 

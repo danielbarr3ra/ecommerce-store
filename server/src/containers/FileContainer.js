@@ -68,7 +68,8 @@ class FileContainer {
     async save(obj) {
         try {
             let allItems = await this.getAll();
-            let lastId = allItems[allItems.length - 1].id ?? 0; //nullish coelece in case you have no objects in it
+            console.log(`TESTING ${JSON.stringify(allItems)}`)
+            let lastId = allItems[allItems.length - 1]?.id ?? 0; //nullish coelece in case you have no objects in it
             allItems.push({ ...obj, id: ++lastId })
             await this.saveAll(allItems)
             return obj; // will return the saved obj
