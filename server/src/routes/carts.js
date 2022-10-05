@@ -1,8 +1,7 @@
 import { express } from "express";
-const { Router } = express;
-
 import { cartsDao as CartsApi } from "../daos/index";
 
+const { Router } = express;
 const shoppingCartsRouter = new Router()
 
 

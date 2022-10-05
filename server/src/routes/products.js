@@ -1,8 +1,8 @@
 import { express } from "express";
-const { Router } = express;
-
+import onlyAdmin from "../middleware/adminAuth.js";
 import { productsDao as ProductsApi } from "../daos/index";
 
+const { Router } = express;
 const productsRouter = new Router()
 
 productsRouter.get('/', async (req, res) => {
