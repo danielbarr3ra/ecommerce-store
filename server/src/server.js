@@ -1,6 +1,6 @@
 import express from 'express'
-import { productsRouter } from './routes/products.js'
-import { shoppingCartsRouter } from './routes/carts.js'
+import productsRouter from './routes/products.js'
+import shoppingCartsRouter from './routes/carts.js'
 
 
 const app = express()

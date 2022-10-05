@@ -1,5 +1,5 @@
-import { express } from "express";
-import { cartsDao as CartsApi } from "../daos/index";
+import express from 'express';
+import { cartsDao as CartsApi } from "../daos/index.js";
 
 const { Router } = express;
 const shoppingCartsRouter = new Router()

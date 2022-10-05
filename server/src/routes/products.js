@@ -1,6 +1,6 @@
-import { express } from "express";
+import express from 'express';
 import onlyAdmin from "../middleware/adminAuth.js";
-import { productsDao as ProductsApi } from "../daos/index";
+import { productsDao as ProductsApi } from "../daos/index.js";
 
 const { Router } = express;
 const productsRouter = new Router()
