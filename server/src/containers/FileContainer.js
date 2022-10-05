@@ -82,7 +82,6 @@ class FileContainer {
 
     async saveAll(anArray) {
         try {
-            console.log(`The array being save is ${JSON.stringify(anArray)}`)
             const stringed = JSON.stringify(anArray)
             await fs.writeFile(this.path, stringed)
         } catch (error) {

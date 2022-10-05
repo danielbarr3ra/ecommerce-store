@@ -95,6 +95,9 @@ shoppingCartsRouter.get('/', async (req, res) => {
 shoppingCartsRouter.post('/', async (req, res) => {
     console.log('testing adding a new cart')
     const obj = req.body;
+    if (!obj.products) {
+        obj.products = [];
+    }
     const added = await CartsApi.save(obj)
     res.json(added);
 })
@@ -111,14 +114,28 @@ shoppingCartsRouter.delete('/:id', async (req, res) => {
 
 
 shoppingCartsRouter.get('/:id/products', async (req, res) => {
-    console.log('testing the getting all the carts')
-    res.json([])
+    console.log('testing the getting items of the carts')
+    const cartId = req.params.id
+    const cart = await CartsApi.get(cartId)
+    const products = cart?.products ?? []
+    res.json(products)
 })
 
 
 shoppingCartsRouter.post('/:id/products', async (req, res) => {
-    console.log('testing the getting all the carts')
-    res.json([])
+    console.log('testing adding items to the cart')
+    const cartId = req.params.id
+    const addedItem = req.body
+    console.log(`addedItem is ${JSON.stringify(addedItem)}`)
+    const cart = await CartsApi.get(cartId)
+    console.log(`the cart is ${JSON.stringify(cart)}`)
+    cart.products.push(addedItem)
+
+    console.log(`UpdatedProducts is ${cart.products}`)
+
+    await CartsApi.update(cartId, cart)
+
+    res.json(cart)
 })
 
 
