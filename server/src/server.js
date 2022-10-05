@@ -126,22 +126,24 @@ shoppingCartsRouter.post('/:id/products', async (req, res) => {
     console.log('testing adding items to the cart')
     const cartId = req.params.id
     const addedItem = req.body
-    console.log(`addedItem is ${JSON.stringify(addedItem)}`)
     const cart = await CartsApi.get(cartId)
-    console.log(`the cart is ${JSON.stringify(cart)}`)
     cart.products.push(addedItem)
-
-    console.log(`UpdatedProducts is ${cart.products}`)
-
     await CartsApi.update(cartId, cart)
-
     res.json(cart)
 })
 
 
 shoppingCartsRouter.delete('/:id/products/:idProd', async (req, res) => {
-    console.log('testing the getting all the carts')
-    res.json([])
+    console.log('testing deleting the products of carts')
+    const cartId = req.params.id
+    const prodId = req.params.idProd
+    const cart = await CartsApi.get(cartId)
+    const updatedProdList = cart.products.filter((prod) => {
+        return prod.id != parseInt(prodId)
+    })
+    cart.products = updatedProdList
+    await CartsApi.update(cartId, cart)
+    res.json(cart)
 })
 
 
