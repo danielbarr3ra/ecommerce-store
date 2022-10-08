@@ -11,6 +11,13 @@ shoppingCartsRouter.get('/', async (req, res) => {
     res.json(allCarts)
 })
 
+shoppingCartsRouter.get('/:id', async (req, res) => {
+    console.log('testing the getting shopping cart with ID')
+    const cartId = req.params.id
+    const cart = await CartsApi.get(cartId);
+    res.json(cart)
+})
+
 shoppingCartsRouter.post('/', async (req, res) => {
     console.log('testing adding a new cart')
     const obj = req.body;
