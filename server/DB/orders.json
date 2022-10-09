@@ -1,0 +1,19 @@
+[
+    {
+        "products": [
+            {
+                "title": "title of the product",
+                "quantity": 3
+            },
+            {
+                "title": "title of the product",
+                "quantity": 3
+            }
+        ],
+        "id": 1,
+        "timeStamp": "timeStamp",
+        "status": "generated, completed",
+        "email": "email of the username"
+    },
+    {}
+]

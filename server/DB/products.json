@@ -1,1 +1,26 @@
-[{"title":"NEWQ ONE","price":32,"thumbnail":"www.com.test","id":1},{"title":"NEWQ ONE","price":32,"thumbnail":"www.com.test","id":2},{"title":"NEWQ ONE","price":32,"thumbnail":"www.com.test","id":3}]
+[
+    {
+        "title": "NEWQ ONE",
+        "price": 32,
+        "thumbnail": "www.com.test",
+        "category": "sampleCateogry",
+        "description": "description of the itiem",
+        "id": 1
+    },
+    {
+        "title": "NEWQ ONE",
+        "price": 32,
+        "thumbnail": "www.com.test",
+        "category": "sampleCateogry",
+        "description": "description of the itiem",
+        "id": 2
+    },
+    {
+        "title": "NEWQ ONE",
+        "price": 32,
+        "thumbnail": "www.com.test",
+        "category": "sampleCateogry",
+        "description": "description of the itiem",
+        "id": "4"
+    }
+]
