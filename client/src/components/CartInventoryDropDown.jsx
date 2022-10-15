@@ -1,7 +1,7 @@
 import React from "react";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
-const CartInventoryDropDown = () => {
+const CartInventoryDropDown = ({ cartData }) => {
 
 
     /**
@@ -21,9 +21,11 @@ const CartInventoryDropDown = () => {
                 label="Age"
                 onChange={handleChange}
             >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                {
+                    cartData.map((row) =>
+                        (<MenuItem key={row.id} value={row.id}>{row.title}</MenuItem>)
+                    )
+                }
             </Select>
         </FormControl>
     )

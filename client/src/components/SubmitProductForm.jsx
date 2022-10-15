@@ -15,7 +15,7 @@ const SubmitProductForm = () => {
         <div>
             <Paper className={"Form"}>
                 <Typography variant="h5" component="h3">
-                    Hey
+                    Submit/Update your own product
                 </Typography>
                 <Typography component="p"> description </Typography>
 

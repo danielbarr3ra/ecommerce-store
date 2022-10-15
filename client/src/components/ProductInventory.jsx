@@ -48,7 +48,8 @@ const ProductInventory = () => {
                     ))}
                 </TableBody>
             </Table>
-        </TableContainer><SubmitProductForm />
+        </TableContainer>
+            <SubmitProductForm />
         </>
     )
 }
