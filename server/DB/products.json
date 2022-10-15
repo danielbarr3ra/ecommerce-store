@@ -21,6 +21,30 @@
         "thumbnail": "www.com.test",
         "category": "sampleCateogry",
         "description": "description of the itiem",
-        "id": "4"
+        "id": 3
+    },
+    {
+        "title": "NEWQ ONE",
+        "price": 32,
+        "thumbnail": "www.com.test",
+        "category": "sampleCateogry",
+        "description": "description of the itiem",
+        "id": 4
+    },
+    {
+        "title": "NEWQ ONE",
+        "price": 32,
+        "thumbnail": "www.com.test",
+        "category": "sampleCateogry",
+        "description": "description of the itiem",
+        "id": 5
+    },
+    {
+        "title": "NEWQ ONE",
+        "price": 32,
+        "thumbnail": "www.com.test",
+        "category": "sampleCateogry",
+        "description": "description of the itiem",
+        "id": 6
     }
 ]

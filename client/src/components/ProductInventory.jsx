@@ -1,53 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TableContainer, TableHead, TableRow, TableCell, TableBody, Table, Paper } from '@mui/material'
 import SubmitProductForm from "./SubmitProductForm";
 
 const ProductInventory = () => {
+    const [data, setData] = useState([]);
+    useEffect(
+        () => {
+            function fetchData() {
+                fetch("/api/products", { method: "GET" }).then((res) => res.json()).then((data) => {
+                    console.log(data)
+                    setData(data)
+                })
+            }
+            fetchData()
+        }
+        , [])
 
-    /** TODO Convert this data creating to context using the data from the server */
-    function createData(
-        name,
-        calories,
-        fat,
-        carbs,
-        protein,
-    ) {
-        return { name, calories, fat, carbs, protein };
-    }
+    /** Modify useEffect to only update when there is a an event from context on cart etc */
 
-    const rows = [
-        createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-        createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-        createData('Eclair', 262, 16.0, 24, 6.0),
-        createData('Cupcake', 305, 3.7, 67, 4.3),
-        createData('Gingerbread', 356, 16.0, 49, 3.9),
-    ];
 
     return (
         <><TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Dessert (100g serving)</TableCell>
-                        <TableCell align="right">Calories</TableCell>
-                        <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                        <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                        <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                        <TableCell>Thumbnail</TableCell>
+                        <TableCell align="right">Title</TableCell>
+                        <TableCell align="right">Categorie&nbsp;(g)</TableCell>
+                        <TableCell align="right">Price&nbsp;(g)</TableCell>
+                        <TableCell align="right">Description&nbsp;(g)</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
+                    {data.map((row) => (
                         <TableRow
-                            key={row.name}
+                            key={row.id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row">
-                                {row.name}
+                                {row.thumbnail}
                             </TableCell>
-                            <TableCell align="right">{row.calories}</TableCell>
-                            <TableCell align="right">{row.fat}</TableCell>
-                            <TableCell align="right">{row.carbs}</TableCell>
-                            <TableCell align="right">{row.protein}</TableCell>
+                            <TableCell align="right">{row.title}</TableCell>
+                            <TableCell align="right">{row.category}</TableCell>
+                            <TableCell align="right">{row.price}</TableCell>
+                            <TableCell align="right">{row.description}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
