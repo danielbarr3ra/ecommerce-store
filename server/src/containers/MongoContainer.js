@@ -7,11 +7,23 @@ const options = {
     useUnifiedTopology: true,
 }
 dotevn.config();
-await mongoose.connect(process.env.MONGOBD_CONNECTION_STRING, options)
 
+let connectionString = 'mongodb+srv://admin:admincoderhouse@cluster0.yd2s1uu.mongodb.net/?retryWrites=true&w=majority'
 class MongoContainer {
     constructor(collection, schema) {
+        this.connect();
         this.model = mongoose.model(collection, schema);
+    }
+
+    async connect() {
+        try {
+            await mongoose.connect(connectionString, options)
+        } catch (error) {
+            console.log('not able to connect to mongodb')
+            console.log(connectionString)
+            console.log(error)
+        }
+        console.log('connection succesful')
     }
 
     async getAll() {
