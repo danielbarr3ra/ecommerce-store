@@ -3,7 +3,7 @@ import { cartSchema } from "../../../schemas/schemas.js";
 
 class MongoCartDao extends MongoContainer {
     constructor() {
-        super('products', cartSchema)
+        super('carts', cartSchema)
     }
 }
 

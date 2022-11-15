@@ -16,6 +16,7 @@ switch (databaseType) {
     case 'mongo':
         console.log('hitting index as mongo')
         productsDao = new MongoProductDao();
+        cartsDao = new MongoCartDao();
     default:
         break;
 }
