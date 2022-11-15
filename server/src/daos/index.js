@@ -19,6 +19,13 @@ switch (databaseType) {
     /**
      * Add the dao file archive for file
      */
+    case 'mongo':
+        console.log('hitting index as mongo')
+        const { default: MongoProductDao } = await import('./products/MongoProductDao.js') // I do not like this kind of import
+        const { default: MongoCartDao } = await import('./carts/MongoCartDao.js')
+
+        productsDao = new MongoProductDao();
+        cartsDao = new MongoCartDao();
     default:
         break;
 }
