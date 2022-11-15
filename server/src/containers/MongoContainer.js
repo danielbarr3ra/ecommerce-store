@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import * as dotevn from 'dotenv'
+import * as mongoObjectUtils from '../utils/mongoObjectUtils.js'
 
 const options = {
     useNewUrlParser: true,
@@ -15,8 +16,16 @@ class MongoContainer {
 
     async getAll() {
         try {
-            const rawData = await this.model.find({})
-            return JSON.parse(allItems)
+            const data = await this.model.find({})
+            const rawData = mongoObjectUtils.rawObject(data);
+            if (rawData.length) {
+                const items = rawData.map(
+                    (item) =>
+                        mongoObjectUtils.renameProperty(item, "_id", "id"))
+                return items
+            } else {
+                return rawData;
+            }
         } catch (error) {
             console.log('there was en error fetching the items');
             console.log(error)
@@ -27,31 +36,39 @@ class MongoContainer {
 
     async get(id) {
         try {
-            const allItems = await this.getAll()
-            const item = allItems.filter((item) => {
-                return item.id == parseInt(id);
-            })
-            if (!item) {
-                throw error('There was no item that matched the id')
+            const data = await this.model.findOne({ _id: id })
+            const rawData = mongoObjectUtils.rawObject(data);
+            if (rawData === null) {
+                return rawData
+            } else {
+                const item = mongoObjectUtils.renameProperty(rawData, "_id", "id")
+                return item
             }
-            return item[0]
         } catch (error) {
             console.log('there was en error fetching the items');
             return error;
         }
     }
+
+    async getByProperty(property, criteria) {
+        try {
+            const data = await this.model.findOne().where(property).equals(criteria);
+            const rawData = mongoObjectUtils.rawObject(data);
+            if (rawData === null) {
+                return rawData
+            } else {
+                const newItem = mongoObjectUtils.renameProperty(rawData, "_id", "id");
+                return newItem;
+            }
+        } catch (error) {
+            console.log(error)
+            console.log('there was an error getting the item by property')
+            return error;
+        }
+    }
     async update(id, obj) {
         try {
-            let allItems = await this.getAll();
-            const index = allItems.findIndex((obj) => {
-                return obj.id == parseInt(id)
-            })
-            const updated = { ...obj, id: id }
-            allItems[index] = updated;
-
-            await this.saveAll(allItems)
-            return updated
-
+            await this.model.updateOne({ _id: id }, { $set: { ...obj } })
         } catch (error) {
             console.log(error)
             console.log('there was an error updating the item')
@@ -60,12 +77,10 @@ class MongoContainer {
     }
     async save(obj) {
         try {
-            let allItems = await this.getAll();
-            console.log(`TESTING ${JSON.stringify(allItems)}`)
-            let lastId = allItems[allItems.length - 1]?.id ?? 0; //nullish coelece in case you have no objects in it
-            allItems.push({ ...obj, id: ++lastId })
-            await this.saveAll(allItems)
-            return obj; // will return the saved obj
+            const data = await this.model.create(obj);
+            const rawData = mongoObjectUtils.rawObject(data);
+            const newObj = mongoObjectUtils.renameProperty(rawData, "_id", "id");
+            return newObj
         } catch (error) {
             console.log('there was an error saving one of the objects')
             console.log(error)
@@ -73,23 +88,9 @@ class MongoContainer {
         }
     }
 
-    async saveAll(anArray) {
-        try {
-            const stringed = JSON.stringify(anArray)
-            await fs.writeFile(this.path, stringed)
-        } catch (error) {
-            console.log('there was an error saving all the objects')
-            console.log(error)
-            return error
-        }
-    }
     async delete(id) {
         try {
-            let allItems = await this.getAll()
-            const filtered = allItems.filter((obj) => {
-                return obj.id != parseInt(id);
-            })
-            await this.saveAll(filtered);
+            await this.model.deleteOne({ _id: id });
         } catch (error) {
             console.log('there was an error deleting the item');
             return error;
@@ -97,7 +98,7 @@ class MongoContainer {
     }
     async deleteAll() {
         try {
-            await this.saveAll([]);
+            await this.model.deleteMany({});
         } catch (error) {
             console.log('there was an error deleting all the values')
             return error;
