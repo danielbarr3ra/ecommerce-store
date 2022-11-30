@@ -1,9 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 
-import HomeDisplay from './components/HomeDisplay';
-import ProductInventory from './components/ProductInventory';
-import ShoppingCarts from './components/ShoppingCarts';
+import Inventory from './components/Inventory';
+import Product from './components/Product';
 
 export default function App() {
   return (
@@ -26,9 +26,8 @@ export default function App() {
 
 
           <Routes>
-            <Route path="/" element={<HomeDisplay />} />
-            <Route path="/inventory" element={<ProductInventory />} />
-            <Route path="/cart" element={<ShoppingCarts />} />
+            <Route path="/" element={<Product />} />
+            <Route path="/inventory" element={<Inventory />} />
           </Routes>
         </div>
       </Router></>
